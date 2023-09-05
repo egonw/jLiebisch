@@ -7,13 +7,42 @@ package io.github.egonw.jliebisch;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
+import org.openscience.cdk.exception.CDKException;
+import org.openscience.cdk.exception.InvalidSmilesException;
+import org.openscience.cdk.inchi.InChIGenerator;
+import org.openscience.cdk.inchi.InChIGeneratorFactory;
+import org.openscience.cdk.interfaces.IAtomContainer;
+import org.openscience.cdk.interfaces.IMolecularFormula;
+import org.openscience.cdk.silent.SilentChemObjectBuilder;
+import org.openscience.cdk.smiles.SmilesParser;
+import org.openscience.cdk.tools.manipulator.MolecularFormulaManipulator;
 
 public class LMAbbrevToolTest {
 
     @Test
-    public void testFAs() {
+    public void testFAs() throws InvalidSmilesException {
         String cxsmiles = LMAbbrevTool.cxsmiles("FA 14:1");
         assertEquals("OC(=O)CC=CC[H] |Sg:n:3:x:ht,Sg:n:6:y:ht| x+y=11", cxsmiles);
+        cxsmiles = LMAbbrevTool.cxsmiles("FA 10:1");
+        assertEquals("OC(=O)CC=CC[H] |Sg:n:3:x:ht,Sg:n:6:y:ht| x+y=7", cxsmiles);
+        SmilesParser parser = new SmilesParser(SilentChemObjectBuilder.getInstance());
+        IAtomContainer container = parser.parseSmiles(cxsmiles);
+
+        // please note that the molForm of CXSMILES does not reflect the extension in this format
+        IMolecularFormula molForm = MolecularFormulaManipulator.getMolecularFormula(container);
+        String mfString = MolecularFormulaManipulator.getString(molForm);
+        assertEquals("C5H8O2", mfString); // instead of the actual C14H26O2
+    }
+
+    @Test
+    public void testSpecificFAs() throws CDKException {
+        String cxsmiles = LMAbbrevTool.cxsmiles("FA 10:0");
+        SmilesParser parser = new SmilesParser(SilentChemObjectBuilder.getInstance());
+        IAtomContainer container = parser.parseSmiles(cxsmiles);
+        InChIGeneratorFactory factory = InChIGeneratorFactory.getInstance();
+        InChIGenerator generator = factory.getInChIGenerator(container);
+        String inchi = generator.getInchiKey();
+        assertEquals("GHVNFZFCNZKVNT-UHFFFAOYSA-N", inchi);
     }
 
 }

@@ -40,6 +40,7 @@
     <maven.compiler.version>3.10.1</maven.compiler.version>
     <maven.shade.version>3.4.0</maven.shade.version>
     <junit.version>5.10.0</junit.version>
+    <cdk.version>2.9</cdk.version>
   </properties>  
 
   <dependencies>
@@ -47,16 +48,43 @@
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
       <version>${junit.version}</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-params</artifactId>
       <version>${junit.version}</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
       <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openscience.cdk</groupId>
+      <artifactId>cdk-smiles</artifactId>
+      <version>${cdk.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openscience.cdk</groupId>
+      <artifactId>cdk-silent</artifactId>
+      <version>${cdk.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openscience.cdk</groupId>
+      <artifactId>cdk-formula</artifactId>
+      <version>${cdk.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openscience.cdk</groupId>
+      <artifactId>cdk-inchi</artifactId>
+      <version>${cdk.version}</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 
