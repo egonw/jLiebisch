@@ -45,4 +45,20 @@ public class LMAbbrevToolTest {
         assertEquals("GHVNFZFCNZKVNT-UHFFFAOYSA-N", inchi);
     }
 
+    @Test
+    public void testCEs() throws InvalidSmilesException {
+        String cxsmiles = LMAbbrevTool.cxsmiles("CE 8:0");
+        assertEquals("C1[C@H](OC(=O)CCCCCCC)CC2=CC[C@@]3([H])[C@]4([H])CC[C@]([H])([C@]([H])(C)CCCC(C)C)[C@@]4(C)CC[C@]3([H])[C@@]2(C)C1", cxsmiles);
+        SmilesParser parser = new SmilesParser(SilentChemObjectBuilder.getInstance());
+        parser.parseSmiles(cxsmiles);
+    }
+
+    @Test
+    public void testLPCs() throws InvalidSmilesException {
+        String cxsmiles = LMAbbrevTool.cxsmiles("LPC 10:1");
+        assertEquals("[C@](COP(=O)([O-])OCC[N+](C)(C)C)([H])(O)COC(=O)CC=CC[H] |Sg:n:19:x:ht,Sg:n:22:y:ht| x+y=7", cxsmiles);
+        SmilesParser parser = new SmilesParser(SilentChemObjectBuilder.getInstance());
+        parser.parseSmiles(cxsmiles);
+    }
+
 }
