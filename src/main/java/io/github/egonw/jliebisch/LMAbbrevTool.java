@@ -1,3 +1,7 @@
+/* 2023 (C) Egon Willighagen <egon.willighagen@gmail.com>
+ *
+ * AGPL 3.0
+ */
 package io.github.egonw.jliebisch;
 
 import java.util.regex.Matcher;
