@@ -5,6 +5,7 @@
 package io.github.egonw.jliebisch;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 import org.openscience.cdk.exception.CDKException;
@@ -43,6 +44,15 @@ public class LMAbbrevToolTest {
         InChIGenerator generator = factory.getInChIGenerator(container);
         String inchi = generator.getInchiKey();
         assertEquals("GHVNFZFCNZKVNT-UHFFFAOYSA-N", inchi);
+    }
+
+    @Test
+    public void testUnsupportedFAs() throws CDKException {
+        String cxsmiles = LMAbbrevTool.cxsmiles("FA 16:4");
+        SmilesParser parser = new SmilesParser(SilentChemObjectBuilder.getInstance());
+        parser.parseSmiles(cxsmiles);
+        assertTrue(cxsmiles.contains("OC(=O)[*]"));
+        assertTrue(cxsmiles.contains("R$"));
     }
 
     @Test
