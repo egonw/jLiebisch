@@ -5,7 +5,7 @@
   <artifactId>liebisch</artifactId>
   <packaging>jar</packaging>
 
-  <version>1.0</version>
+  <version>1.2-SNAPSHOT</version>
   <name>liebisch</name>
   <description>Java library to convert Liebisch lipid notation to CXSMILES.</description>
   <url>http://www.github.com/egonw/jLiebisch</url>
@@ -40,7 +40,7 @@
     <maven.compiler.version>3.10.1</maven.compiler.version>
     <maven.shade.version>3.4.0</maven.shade.version>
     <junit.version>5.10.0</junit.version>
-    <cdk.version>2.9</cdk.version>
+    <cdk.version>2.11</cdk.version>
   </properties>  
 
   <dependencies>
